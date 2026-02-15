@@ -401,7 +401,7 @@ function createLandingPage() {
             <div class="landing-content">
                 <h1>Stop Missing The Right Jobs.</h1>
                 <p class="landing-subtext">Precision-matched job discovery delivered daily at 9AM.</p>
-                <a href="/settings" class="btn btn-primary btn-large" data-route="/settings">Start Tracking</a>
+                <a href="settings" class="btn btn-primary btn-large" data-route="/settings">Start Tracking</a>
             </div>
         </div>
     `;
