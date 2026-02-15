@@ -1802,19 +1802,56 @@ function setupFilterListeners() {
 // ROUTER & NAVIGATION
 // ============================================
 
-// Router function
+// Initialize router
+window.addEventListener('popstate', router);
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.addEventListener('click', e => {
+        if (e.target.matches('[data-route]')) {
+            e.preventDefault();
+            navigateTo(e.target.getAttribute('data-route'));
+        } else if (e.target.parentElement && e.target.parentElement.matches('[data-route]')) {
+            e.preventDefault();
+            navigateTo(e.target.parentElement.getAttribute('data-route'));
+        }
+    });
+
+    router();
+});
+
+function navigateTo(url) {
+    history.pushState(null, null, url);
+    router();
+}
+
 function router() {
-    const path = window.location.pathname;
+    // Handle Vercel/subdirectory routing by stripping prefix if needed
+    let path = window.location.pathname;
+
+    // If deployed in a subdirectory (e.g. /job-tracker/), remove it for matching
+    // This is a simple heuristic; for production, maybe use a config
+    const repoName = '/job-tracker';
+    if (path.startsWith(repoName) && path !== repoName) {
+        path = path.replace(repoName, '');
+    } else if (path === repoName) {
+        path = '/';
+    }
+
+    // Default to / if empty
+    if (path === '') path = '/';
+
     const route = routes[path] || routes['/'];
+    if (route) {
+        document.title = `${route.title} - KodNest Job Tracker`;
+        const app = document.getElementById('app');
+        app.innerHTML = route.render();
+        window.scrollTo(0, 0);
 
-    // Update page title
-    document.title = `${route.title} - KodNest Job Tracker`;
-
-    // Render page content
-    const app = document.getElementById('app');
-    app.innerHTML = route.render();
-
-    // Update active navigation link
+        // Re-attach event listeners for dynamic content if needed
+        // (Currently handled by delegated listener on body)
+    } else {
+        // 404
+        document.getElementById('app').innerHTML = '<h1>404 - Page Not Found</h1>';
+    }
     updateActiveNavLink(path);
 
     // Setup filter listeners if on dashboard or saved
