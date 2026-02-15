@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Notification Tracker - KodNest Premium</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-brand">KodNest Job Tracker</div>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/dashboard" class="nav-link active" data-route="/dashboard">Dashboard</a></li>
+                <li><a href="/saved" class="nav-link" data-route="/saved">Saved</a></li>
+                <li><a href="/digest" class="nav-link" data-route="/digest">Digest</a></li>
+                <li><a href="/settings" class="nav-link" data-route="/settings">Settings</a></li>
+                <li><a href="/proof" class="nav-link" data-route="/proof">Proof</a></li>
+
+                <!-- NEW ROUTES (Required for Test System) -->
+                <li><a href="/jt/07-test" class="nav-link" data-route="/jt/07-test">Test</a></li>
+                <li>
+                    <a href="/jt/08-ship" class="nav-link nav-ship" data-route="/jt/08-ship">
+                        Ship
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="app" class="app-container"></main>
+
+    <script src="/data.js"></script>
+    <script src="/app.js"></script>
+
+</body>
+
+</html>
